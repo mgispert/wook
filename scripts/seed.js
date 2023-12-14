@@ -49,10 +49,10 @@ async function seedBooks(client) {
     const createTable = await client.sql`
     CREATE TABLE IF NOT EXISTS books (
     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
     author_id UUID NOT NULL,
-    amount INT NOT NULL,
     status VARCHAR(255) NOT NULL,
-    date DATE NOT NULL
+    type VARCHAR(255) NOT NULL,
   );
 `;
 
@@ -62,10 +62,10 @@ async function seedBooks(client) {
     const insertedBooks = await Promise.all(
       books.map(
         (book) => client.sql`
-        INSERT INTO books (author_id, amount, status, date)
-        VALUES (${book.author_id}, ${book.amount}, ${book.status}, ${book.date})
-        ON CONFLICT (id) DO NOTHING;
-      `,
+          INSERT INTO books (id, title, author_id, status, type)
+          VALUES (${book.id}, ${book.title}, ${book.author_id}, ${book.status}, ${book.type})
+          ON CONFLICT (id) DO NOTHING;
+        `,
       ),
     );
 
@@ -90,7 +90,6 @@ async function seedAuthors(client) {
       CREATE TABLE IF NOT EXISTS authors (
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
-        email VARCHAR(255) NOT NULL,
         image_url VARCHAR(255) NOT NULL
       );
     `;
@@ -101,8 +100,8 @@ async function seedAuthors(client) {
     const insertedAuthors = await Promise.all(
       authors.map(
         (author) => client.sql`
-        INSERT INTO authors (id, name, email, image_url)
-        VALUES (${author.id}, ${author.name}, ${author.email}, ${author.image_url})
+        INSERT INTO authors (id, name,image_url)
+        VALUES (${author.id}, ${author.name}, ${author.image_url})
         ON CONFLICT (id) DO NOTHING;
       `,
       ),
@@ -126,7 +125,7 @@ async function seedBooksRead(client) {
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS booksRead (
         month VARCHAR(4) NOT NULL UNIQUE,
-        booksRead INT NOT NULL
+        books INT NOT NULL
       );
     `;
 
@@ -137,7 +136,7 @@ async function seedBooksRead(client) {
       booksRead.map(
         (booksRead) => client.sql`
         INSERT INTO booksRead (month, book)
-        VALUES (${booksRead.month}, ${booksRead.book})
+        VALUES (${booksRead.month}, ${booksRead.books})
         ON CONFLICT (month) DO NOTHING;
       `,
       ),

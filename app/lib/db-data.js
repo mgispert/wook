@@ -15,55 +15,32 @@ const users = [
 
 const authors = [
   {
-    id: '1',
+    id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
     name: 'Rick Riordan',
     image_url: '../../public/rick.jpg',
   },
   {
-    id: '2',
+    id: '3958dc9e-742f-4377-85e9-fec4b6a6442b',
     name: 'J.C Cervantes',
     image_url: '../../public/cervantes.jpeg',
   },
   {
-    id: '3',
+    id: '3958dc9e-737f-4377-85e9-fec4b6a6442c',
     name: 'Roshani Chokshi',
-    image_url: '../../public//roshani.jpg',
-  },
-  {
-    id: '4',
-    name: 'Graci Kim',
-    image_url: '../../public/kim.jpeg',
-  },
-  {
-    id: '5',
-    name: 'Yoon Ha Lee',
-    image_url: '../../public/lee.jpeg',
-  },
-  {
-    id: '6',
-    name: 'Teilor Kay Mejia',
-    image_url: '../../public/mejia.jpg',
-  },
-  {
-    id: '7',
-    name: 'Sarwat Chadda',
-    image_url: '../../public/chadda.jpeg',
-  },
-  {
-    id: '8',
-    name: 'Lori M. Lee',
-    image_url: '../../public/lori.jpeg',
+    image_url: '../../public/roshani.jpg',
   },
 ];
 
 const books = [
   {
+    id: 'some-unique-id-1',
     author_id: authors[0].id,
     title: 'The Kane Chronicles 1',
     type: 'paperback',
     status: 'read',
   },
   {
+    id: 'some-unique-id-2',
     author_id: authors[1].id,
     title: 'Storm Runner',
     type: 'paperback',

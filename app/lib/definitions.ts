@@ -1,7 +1,3 @@
-// This file contains type definitions for your data.
-// It describes the shape of the data, and what data type each property should accept.
-// For simplicity of teaching, we're manually defining these types.
-// However, these types are generated automatically if you're using an ORM such as Prisma.
 export type User = {
   id: string;
   name: string;
@@ -9,80 +5,71 @@ export type User = {
   password: string;
 };
 
-export type Customer = {
+export type Author = {
   id: string;
   name: string;
-  email: string;
   image_url: string;
 };
 
-export type Invoice = {
+export type Book = {
   id: string;
-  customer_id: string;
-  amount: number;
-  date: string;
-  // In TypeScript, this is called a string union type.
-  // It means that the "status" property can only be one of the two strings: 'pending' or 'paid'.
-  status: 'pending' | 'paid';
+  title: string;
+  author_id: string;
+  status: 'read' | 'TBR';
+  type: 'paperback' | 'kindle';
 };
 
-export type Revenue = {
+export type BooksRead = {
   month: string;
-  revenue: number;
+  book: number;
 };
 
-export type LatestInvoice = {
+export type LatestBook = {
+  id: string;
+  title: string;
+  type: 'paperback' | 'kindle';
+  status: 'read' | 'TBR';
+};
+
+export type LatestBookRaw = Omit<LatestBook, 'title'> & {
+  title: string;
+};
+
+export type BooksTable = {
+  id: string;
+  author_id: string;
+  title: string;
+  image_url: string;
+  type: 'paperback' | 'kindle';
+  status: 'read' | 'TBR';
+};
+
+export type AuthorsTableType = {
   id: string;
   name: string;
   image_url: string;
-  email: string;
-  amount: string;
+  total_books: number;
+  total_TBR: number;
+  total_read: number;
 };
 
-// The database returns a number for amount, but we later format it to a string with the formatCurrency function
-export type LatestInvoiceRaw = Omit<LatestInvoice, 'amount'> & {
-  amount: number;
-};
-
-export type InvoicesTable = {
+export type FormattedAuthorsTable = {
   id: string;
-  customer_id: string;
   name: string;
-  email: string;
   image_url: string;
-  date: string;
-  amount: number;
-  status: 'pending' | 'paid';
+  total_books: number;
+  total_TBR: string;
+  total_read: string;
 };
 
-export type CustomersTableType = {
-  id: string;
-  name: string;
-  email: string;
-  image_url: string;
-  total_invoices: number;
-  total_pending: number;
-  total_paid: number;
-};
-
-export type FormattedCustomersTable = {
-  id: string;
-  name: string;
-  email: string;
-  image_url: string;
-  total_invoices: number;
-  total_pending: string;
-  total_paid: string;
-};
-
-export type CustomerField = {
+export type AuthorField = {
   id: string;
   name: string;
 };
 
-export type InvoiceForm = {
+export type BookForm = {
   id: string;
-  customer_id: string;
-  amount: number;
-  status: 'pending' | 'paid';
+  author_id: string;
+  type: 'paperback' | 'kindle';
+  status: 'TBR' | 'read';
 };

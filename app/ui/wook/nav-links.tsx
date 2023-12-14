@@ -11,11 +11,11 @@ import clsx from 'clsx';
 const links = [
   { name: 'Home', href: '/wook', icon: HomeIcon },
   {
-    name: 'Invoices',
+    name: 'Books',
     href: '/wook/books',
     icon: DocumentDuplicateIcon,
   },
-  { name: 'Customers', href: '/wook/authors', icon: UserGroupIcon },
+  { name: 'Authors', href: '/wook/authors', icon: UserGroupIcon },
 ];
 
 export default function NavLinks() {
